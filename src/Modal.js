@@ -1,5 +1,5 @@
 import React from 'react';
-import './Modal.css';
+// import './Modal.css';
 import AnnouncementForm from './AnnouncementForm';
 
 const Modal = ({ isOpen, onClose, children }) => {
