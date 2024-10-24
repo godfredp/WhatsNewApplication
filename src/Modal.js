@@ -1,18 +1,34 @@
 import React from 'react';
-// import './Modal.css';
+import { Modal as MuiModal, Box, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import AnnouncementForm from './AnnouncementForm';
 
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
+const Modal = ({ isOpen, onClose }) => {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+  };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <AnnouncementForm></AnnouncementForm>
-        <button className="close-button" onClick={onClose}>X</button>
-        {children}
-      </div>
-    </div>
+    <MuiModal open={isOpen} onClose={onClose} aria-labelledby="modal-title">
+      <Box sx={style}>
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{ position: 'absolute', top: 8, right: 8 }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <AnnouncementForm />
+      </Box>
+    </MuiModal>
   );
 };
 

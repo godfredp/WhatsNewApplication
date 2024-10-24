@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import './AnnouncementForm.css';
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  TextareaAutosize,
+  Typography,
+  Grid,
+  Stack
+} from '@mui/material';
 
 const AnnouncementForm = () => {
   const [formData, setFormData] = useState({
@@ -8,12 +20,8 @@ const AnnouncementForm = () => {
     roleTagId: 0,
     topicTagId: 0,
     isMajor: true,
-    subFeatures: [
-     
-    ],
-    featureGuides: [
-    
-    ]
+    subFeatures: [],
+    featureGuides: []
   });
 
   const [roles, setRoles] = useState([]);
@@ -23,9 +31,7 @@ const AnnouncementForm = () => {
     const fetchRoles = async () => {
       try {
         const response = await fetch('http://localhost:5046/api/v1/dropdown/role-tags');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setRoles(data);
       } catch (error) {
@@ -36,9 +42,7 @@ const AnnouncementForm = () => {
     const fetchTopicTags = async () => {
       try {
         const response = await fetch('http://localhost:5046/api/v1/dropdown/topic-tags');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setTopicTags(data);
       } catch (error) {
@@ -53,10 +57,7 @@ const AnnouncementForm = () => {
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
     setFormData({ ...formData, [name]: value });
-
-    
   };
 
   // Handle dynamic fields like subFeatures and featureGuides
@@ -69,14 +70,8 @@ const AnnouncementForm = () => {
 
   // Add new subFeature or featureGuide
   const handleAddField = (type) => {
-    const newField =
-      type === 'subFeatures'
-        ? { text: '', videoUrl: '' }
-        : { steps: '' };
-    setFormData({
-      ...formData,
-      [type]: [...formData[type], newField],
-    });
+    const newField = type === 'subFeatures' ? { text: '', videoUrl: '' } : { steps: '' };
+    setFormData({ ...formData, [type]: [...formData[type], newField] });
   };
 
   // Remove subFeature or featureGuide
@@ -96,9 +91,7 @@ const AnnouncementForm = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit form');
-      }
+      if (!response.ok) throw new Error('Failed to submit form');
 
       const result = await response.json();
       console.log('Form submitted successfully:', result);
@@ -107,138 +100,160 @@ const AnnouncementForm = () => {
     }
   };
 
-  
-
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Announcement Form</h2>
+    <Box component="form" onSubmit={handleSubmit} sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        Announcement Form
+      </Typography>
 
-      <label>
-        Title:
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-      </label>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
 
-      <label>
-        Role Tag:
-        <select
-          name="roleTagId"
-          value={formData.roleTagId}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a role</option>
-          {roles.map((role) => (
-            <option key={role.id} value={role.id}>
-              {role.name}
-            </option>
-          ))}
-        </select>
-      </label>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+            <InputLabel>Role Tag</InputLabel>
+            <Select
+              name="roleTagId"
+              value={formData.roleTagId}
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value=""><em>Select a role</em></MenuItem>
+              {roles.map((role) => (
+                <MenuItem key={role.id} value={role.id}>
+                  {role.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
 
-      <label>
-        Topic Tag:
-        <select
-          name="topicTagId"
-          value={formData.topicTagId}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a tag</option>
-          {topicTags.map((topicTag) => (
-            <option key={topicTag.id} value={topicTag.id}>
-              {topicTag.name}
-            </option>
-          ))}
-        </select>
-      </label>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+            <InputLabel>Topic Tag</InputLabel>
+            <Select
+              name="topicTagId"
+              value={formData.topicTagId}
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value=""><em>Select a tag</em></MenuItem>
+              {topicTags.map((topicTag) => (
+                <MenuItem key={topicTag.id} value={topicTag.id}>
+                  {topicTag.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
 
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Author"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
 
-      <label>
-        Author:
-        <input
-          type="text"
-          name="author"
-          value={formData.author}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+            <InputLabel>Is Major</InputLabel>
+            <Select
+              name="isMajor"
+              value={formData.isMajor}
+              onChange={handleChange}
+            >
+              <MenuItem value={true}>Yes</MenuItem>
+              <MenuItem value={false}>No</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
 
-      <label>
-        Is Major:
-        <select
-          name="isMajor"
-          value={formData.isMajor}
-          onChange={handleChange}
-        >
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
-        </select>
-      </label>
-
-      <h3>Sub Features</h3>
+      <Typography variant="h6" gutterBottom mt={4}>
+        Sub Features
+      </Typography>
       {formData.subFeatures.map((subFeature, index) => (
-        <div key={index}>
-          <label>
-            Sub Feature Text {index + 1}:
-            <input
-              type="text"
+        <Grid container spacing={2} key={index}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label={`Sub Feature Text ${index + 1}`}
               name="text"
               value={subFeature.text}
               onChange={(e) => handleDynamicChange(e, index, 'subFeatures')}
               required
             />
-          </label>
-          <label>
-            Sub Feature Video URL {index + 1}:
-            <input
-              type="url"
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label={`Sub Feature Video URL ${index + 1}`}
               name="videoUrl"
               value={subFeature.videoUrl}
               onChange={(e) => handleDynamicChange(e, index, 'subFeatures')}
               required
             />
-          </label>
-          <button type="button" onClick={() => handleRemoveField(index, 'subFeatures')}>
-            Remove Sub Feature
-          </button>
-        </div>
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" color="secondary" onClick={() => handleRemoveField(index, 'subFeatures')}>
+              Remove Sub Feature
+            </Button>
+          </Grid>
+        </Grid>
       ))}
-      <button type="button" onClick={() => handleAddField('subFeatures')}>
+      <Button variant="outlined" onClick={() => handleAddField('subFeatures')} sx={{ mt: 2 }}>
         Add Sub Feature
-      </button>
+      </Button>
 
-      <h3>Feature Guides</h3>
+      <Typography variant="h6" gutterBottom mt={4}>
+        Feature Guides
+      </Typography>
       {formData.featureGuides.map((featureGuide, index) => (
-        <div key={index}>
-          <label>
-            Guide Step {index + 1}:
-            <textarea
+        <Grid container spacing={2} key={index}>
+          <Grid item xs={12}>
+            <TextareaAutosize
+              minRows={3}
+              placeholder={`Guide Step ${index + 1}`}
               name="steps"
               value={featureGuide.steps}
               onChange={(e) => handleDynamicChange(e, index, 'featureGuides')}
               required
+              style={{ width: '100%' }}
             />
-          </label>
-          <button type="button" onClick={() => handleRemoveField(index, 'featureGuides')}>
-            Remove Guide Step
-          </button>
-        </div>
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" color="secondary" onClick={() => handleRemoveField(index, 'featureGuides')}>
+              Remove Guide Step
+            </Button>
+          </Grid>
+        </Grid>
       ))}
-      <button type="button" onClick={() => handleAddField('featureGuides')}>
+      <Button variant="outlined" onClick={() => handleAddField('featureGuides')} sx={{ mt: 2 }}>
         Add Guide Step
-      </button>
+      </Button>
 
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+      <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+        <Button variant="contained" color="primary" type="submit">
+          Submit
+        </Button>
+        <Button variant="outlined" color="secondary" onClick={() => console.log("Form reset logic")}>
+          Reset
+        </Button>
+      </Stack>
+    </Box>
   );
 };
 

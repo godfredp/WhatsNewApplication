@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ArcadeEmbed } from './ArcadeEmbed'; 
-// import './AnnouncementView.css';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Container,
+} from '@mui/material';
+import AnnouncementDetail from './AnnouncementDetail';
 
 const AnnouncementComponent = () => {
   const [announcement, setAnnouncement] = useState(null);
@@ -27,46 +32,34 @@ const AnnouncementComponent = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <Typography color="error">Error: {error}</Typography>
+      </Box>
+    );
   }
 
-  const AnnouncementDetail = ({ data }) => {
-    return (
-      <div className="announcement-detail">
-        <h1>{data.title}</h1>
-        <p><strong>Author:</strong> {data.author}</p>
-        <p><strong>Role:</strong> {data.roleTagName}</p>
-        <p><strong>Topic:</strong> {data.topicTagName}</p>
-        <p><strong>Created Date:</strong> {new Date(data.createdDate).toLocaleString()}</p>
-        
-        <h2>Sub Features</h2>
-        <ul>
-          {data.subFeatures.map(feature => (
-            <li key={feature.id}>
-              <p dangerouslySetInnerHTML={{ __html: feature.text }} />
-                    {feature.videoUrl && <ArcadeEmbed src={feature.videoUrl} />}
-            </li>
-          ))}
-        </ul>
-        
-        <h2>Feature Guides</h2>
-        <ol>
-          {data.featureGuides.map(guide => (
-            <li key={guide.id}>{guide.steps}</li>
-          ))}
-        </ol>
-      </div>
-    );
-  };
-
   return (
-    <div>
-      <AnnouncementDetail data={announcement} />
-      </div>
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', color: '#1976d2' }}>
+        What's New
+      </Typography>
+      {announcement ? (
+        <AnnouncementDetail data={announcement} />
+      ) : (
+        <Typography variant="h6" align="center" color="textSecondary">
+          No announcement found
+        </Typography>
+      )}
+    </Container>
   );
 };
 
