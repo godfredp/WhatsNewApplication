@@ -1,23 +1,37 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Modal from './Modal';
+import WhatsNewModal from './WhatsNewModal';
 
-function App() {
+const App = () => {
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isWhatsNewModalOpen, setWhatsNewModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleOpenWhatsNewModal = () => {
+    setWhatsNewModalOpen(true);
+  };
+
+  const handleCloseWhatsNewModal = () => {
+    setWhatsNewModalOpen(false);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleOpenModal}>Add New Announcement</button>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      </Modal>
+      <hr></hr>
+      <button onClick={handleOpenWhatsNewModal}>What's New?</button>
+      <WhatsNewModal isOpen={isWhatsNewModalOpen} onClose={handleCloseWhatsNewModal}></WhatsNewModal>
     </div>
   );
 }

@@ -1,0 +1,108 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Form Container */
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Headings */
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  /* Labels */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+  }
+  
+  /* Input and Select Fields */
+  input[type="text"],
+  input[type="url"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  input[type="text"]:focus,
+  input[type="url"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Dynamic Fields */
+  div {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Remove Button */
+  button[type="button"] {
+    background-color: #dc3545;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #c82333;
+  }
+  
+
+  /* Submit Button Container */
+div {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px;   /* Add some space above the button */
+  }
+  
+  /* Submit Button */
+  button[type="submit"] {
+    background-color: #28a745; /* Change to green for submit action */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+  
