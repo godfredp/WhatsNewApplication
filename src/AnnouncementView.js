@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArcadeEmbed } from './ArcadeEmbed'; 
-import './AnnouncementView.css';
+// import './AnnouncementView.css';
 
 const AnnouncementComponent = () => {
   const [announcement, setAnnouncement] = useState(null);

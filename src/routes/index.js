@@ -1,6 +1,7 @@
 import React from "react";
 
 import Recruitment from "../pages/recruitment";
+import AddLead from "../pages/add-lead";
 
 export const routes = [
   {
@@ -22,6 +23,10 @@ export const routes = [
   {
     path: "/recruitment",
     element: <Recruitment />,
+  },
+  {
+    path: "/recruitment/add-lead",
+    element: <AddLead />,
   },
   {
     path: "/hr",

@@ -1,12 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 
-const App = () => {
+import DefaultLayout from "./layout/default";
+
+function App() {
   return (
-       <Routes>
-      {routes.map((route) => (
-        <Route key={route.path} {...route} />
-      ))}
+    <Routes>
+      <Route path="/" element={<DefaultLayout />}>
+        {routes.map((route) => (
+          <Route key={route.path} {...route} />
+        ))}
+      </Route>
     </Routes>
   );
 }

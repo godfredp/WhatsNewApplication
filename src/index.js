@@ -5,27 +5,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
-import DefaultLayout from "./layout/default";
-import Joyride from "react-joyride";
-
-const steps = [
-  {
-    target: ".recruitment-tab",
-    content: "Please click on recruitment tab",
-  },
-  {
-    target: ".add-leads-button",
-    content: "This another awesome feature!",
-  },
-];
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <DefaultLayout>
-        <App />
-      </DefaultLayout>
+      <App />
     </BrowserRouter>
   </React.StrictMode>
 );
