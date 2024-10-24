@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
 import { Outlet } from "react-router-dom";
+import Button from '../components/button'
+import Modal from '../Modal';
+import WhatsNewModalForm from '../WhatsNewModal';
 
 import WhatsNewModal from "../components/modals/whats-new/WhatsNewModal";
 
@@ -116,6 +119,26 @@ const initialSteps = [
 ];
 
 const DefaultLayout = ({ children }) => {
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isWhatsNewModalOpen, setWhatsNewModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleOpenWhatsNewModal = () => {
+    setWhatsNewModalOpen(true);
+  };
+
+  const handleCloseWhatsNewModal = () => {
+    setWhatsNewModalOpen(false);
+  };
+
   const [{ run, stepIndex, steps }, setState] = useState({
     run: false,
     stepIndex: 0,
@@ -208,6 +231,16 @@ const DefaultLayout = ({ children }) => {
           }}
         />
       )}
+      <>
+      <div className="absolute right-0 bottom-0">
+        <Button onClick={handleOpenModal}>Add New Announcement</Button>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        </Modal>
+        <hr></hr>
+        <Button onClick={handleOpenWhatsNewModal}>What's New?</Button>
+        <WhatsNewModalForm isOpen={isWhatsNewModalOpen} onClose={handleCloseWhatsNewModal}></WhatsNewModalForm>
+      </div>
+      </>
     </div>
   );
 };
