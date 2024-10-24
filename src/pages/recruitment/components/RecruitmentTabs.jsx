@@ -10,14 +10,7 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 import Button from "../../../components/button";
 
-import Joyride from "react-joyride";
-
-const steps = [
-  {
-    target: ".add-leads-button",
-    content: "Start adding leads by clicking this button",
-  },
-];
+import { useNavigate } from "react-router";
 
 const StyledTabs = styled(Tabs)({
   borderBottom: "1px solid #f0f0f1",
@@ -70,15 +63,25 @@ function a11yProps(index) {
 }
 
 const tabs = [
-  { id: 1, label: "Leads" },
-  { id: 2, label: "Applicants" },
+  { id: 1, label: "Leads", target: "leads-tab" },
+  { id: 2, label: "Applicants", target: "" },
 ];
 
-const RecruitmentTabs = () => {
-  const [value, setValue] = React.useState(0);
+const RecruitmentTabs = ({ handleClickOpen }) => {
+  const navigate = useNavigate();
+
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    if (newValue === 0) {
+      handleClickOpen();
+    }
+  };
+
+  const handleAddLead = () => {
+    navigate("/recruitment/add-lead");
   };
 
   return (
@@ -91,6 +94,7 @@ const RecruitmentTabs = () => {
         >
           {tabs.map((tab) => (
             <StyledTab
+              id={tab.target}
               label={tab.label}
               {...a11yProps(tab.id)}
               className="w-[270px]"
@@ -105,6 +109,7 @@ const RecruitmentTabs = () => {
               variant="outlined"
               endIcon={<AddIcon />}
               className="add-leads-button"
+              onClick={handleAddLead}
             >
               ADD LEAD
             </Button>
@@ -115,7 +120,16 @@ const RecruitmentTabs = () => {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <div>
+          <div className="flex mt-4 gap-4">
+            <Button variant="outlined" endIcon={<AddIcon />}>
+              ADD APPLICANT
+            </Button>
+            <Button variant="outlined" endIcon={<UploadFileIcon />}>
+              ACTIONS
+            </Button>
+          </div>
+        </div>
       </CustomTabPanel>
     </Box>
   );

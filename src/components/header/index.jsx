@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
 
-const Header = ({ handleClickOpen }) => {
+import Button from "../button";
+
+const Header = ({ handleClickOpen, handleOpenWhatsNew }) => {
   const location = useLocation();
 
   const navLinks = [
@@ -38,7 +40,7 @@ const Header = ({ handleClickOpen }) => {
   ];
 
   return (
-    <div className="flex px-[30px] h-[60px] border-b-[1px] border-[#e8e8e9] bg-white">
+    <div className="flex px-[30px] h-[60px] border-b-[1px] border-[#e8e8e9] bg-white items-center">
       <div className="inline-flex items-center">
         <Link to={"/"}>
           <img
@@ -75,6 +77,11 @@ const Header = ({ handleClickOpen }) => {
             );
           })}
         </ul>
+      </div>
+      <div className="ml-auto">
+        <Button variant="contained" onClick={handleOpenWhatsNew}>
+          Start Walkthrough
+        </Button>
       </div>
     </div>
   );
