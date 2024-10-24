@@ -1,0 +1,70 @@
+/* AnnouncementComponent.css */
+
+body {
+    font-family: 'Arial', sans-serif; /* Use a modern font */
+    background-color: #f0f4f8; /* Light background for contrast */
+  }
+  
+  .announcement-detail {
+    background: linear-gradient(135deg, #ffffff 0%, #eaeaea 100%); /* Subtle gradient */
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    max-width: 800px; /* Max width for better readability */
+    transition: transform 0.2s; /* Smooth scaling effect */
+  }
+  
+  .announcement-detail:hover {
+    transform: scale(1.02); /* Slightly scale on hover */
+  }
+  
+  h1 {
+    font-size: 28px; /* Increased size for the main title */
+    color: #333;
+    margin-bottom: 10px; /* Spacing below the title */
+    border-bottom: 2px solid #007bff; /* Underline effect */
+    padding-bottom: 5px; /* Space below the underline */
+  }
+  
+  h2 {
+    font-size: 22px; /* Increased size for subheadings */
+    color: #007bff; /* Consistent color for subheadings */
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 16px; /* Consistent font size */
+    color: #555; /* Darker color for better readability */
+    line-height: 1.5; /* Increased line height for spacing */
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 20px; /* Space below lists */
+  }
+  
+  li {
+    margin: 10px 0;
+    background-color: #f9f9f9; /* Slight background for list items */
+    padding: 10px; /* Padding inside list items */
+    border-radius: 5px; /* Rounded corners for list items */
+    transition: background-color 0.3s; /* Transition for hover effect */
+  }
+  
+  li:hover {
+    background-color: #eaeaea; /* Change background on hover */
+  }
+  
+  .loading, .error {
+    text-align: center;
+    font-size: 18px;
+    color: #ff0000; /* Red for error */
+  }
+  
+  .loading {
+    color: #007bff; /* Blue for loading */
+    font-weight: bold; /* Bold text for emphasis */
+  }
+  
