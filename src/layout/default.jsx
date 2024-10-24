@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
 import { Outlet } from "react-router-dom";
-import Button from '../components/button'
-import Modal from '../Modal';
-import WhatsNewModalForm from '../WhatsNewModal';
+import Button from "../components/button";
+import Modal from "../Modal";
+import WhatsNewModalForm from "../WhatsNewModal";
 
 import WhatsNewModal from "../components/modals/whats-new/WhatsNewModal";
 
@@ -119,7 +119,6 @@ const initialSteps = [
 ];
 
 const DefaultLayout = ({ children }) => {
-
   const [isModalOpen, setModalOpen] = useState(false);
   const [isWhatsNewModalOpen, setWhatsNewModalOpen] = useState(false);
 
@@ -222,6 +221,22 @@ const DefaultLayout = ({ children }) => {
       <div className="p-[20px] bg-[#fbfbfb]">
         <Outlet context={{ handleClickOpen, setJoyride: setState }} />
       </div>
+
+      <div className="flex flex-col gap-2 absolute right-0 bottom-20">
+        <Button onClick={handleOpenModal} className="!text-[12px]">
+          Add New Announcement
+        </Button>
+        <Button onClick={handleOpenWhatsNewModal} className="!text-[12px]">
+          What's New?
+        </Button>
+      </div>
+
+      <WhatsNewModalForm
+        isOpen={isWhatsNewModalOpen}
+        onClose={handleCloseWhatsNewModal}
+      />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+
       {whatsNewModal && (
         <WhatsNewModal
           open={whatsNewModal}
@@ -231,16 +246,6 @@ const DefaultLayout = ({ children }) => {
           }}
         />
       )}
-      <>
-      <div className="absolute right-0 bottom-0">
-        <Button onClick={handleOpenModal}>Add New Announcement</Button>
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        </Modal>
-        <hr></hr>
-        <Button onClick={handleOpenWhatsNewModal}>What's New?</Button>
-        <WhatsNewModalForm isOpen={isWhatsNewModalOpen} onClose={handleCloseWhatsNewModal}></WhatsNewModalForm>
-      </div>
-      </>
     </div>
   );
 };
